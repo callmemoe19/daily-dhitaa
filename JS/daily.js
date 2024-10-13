@@ -137,7 +137,7 @@ function getMotivasiByTanggal(tanggal) {
     case "13":
       return "minimal liat tanggal lah yaaa";
     case "14":
-      return "alooo faraaa, hari ini cuma mau sharing aja,<br>sadar gak sih, kadang kita itu khawatir sama masa yg blm pasti, kita khwatir klo kita bakalan gagal,<br>kita khawatir klo yg kita kerjakan sekarang, bakalan ngga sesuai sama ekspektasi kita,<br>kita takut kecewa, kita takut apa yg kita kerjain sekarang malah ujung-ujungnya bakal sia-sia.<br><br> Disini ak cma mau ngingetin, sesuatu yg memang sudah menjadi hak kita ngga akan hilang atau keliru,<br>jadiii, ya tenang aja, okeey?<br><br>Have a nice day Faraaa ";
+      return "alooo faraaa, hari ini cuma ngingetin ajaa,<br>kesuksesan orang lain itu bukan kegagalan kita lhooo<br>jadi kita ndak perlu memaksakan 'harus' lebih hebat dari orng lain,<br>lebih baik dari kmrin saja sudah cukup.<br><br>everythings gonna be finee, tenang ajaaa<br><br>Have a nice day Faraaa<br><br>*input angka 20 klo mau eskriiimmm hhi.";
     case "15":
       return "gtw gelapp";
     case "16":
@@ -149,7 +149,7 @@ function getMotivasiByTanggal(tanggal) {
     case "19":
       return "hmmm";
     case "20":
-      return "apa yaaaa";
+      return "beli sendiri wleee, salken yaa hho.";
     case "21":
       return "tgl 21_-";
     case "22":
