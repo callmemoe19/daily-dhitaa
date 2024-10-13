@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+    <title>my cutieeee</title>
+    <style>
+        body {
+            font-family: 'Poppins';
+            text-align: center;
+            margin: 50px;
+            background-color: #ffd6ff;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            text-align: center;
+            height: 20px;
+            width: 40px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            color: #3d405b;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px;
+            font-size: 14px;
+            background-color: #c77dff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #motivation {
+            margin-top: 20px;
+            font-size: 15px;
+            background-color: #CCCCFF;
+            color: black;
+            animation: fadeIn 1s ease-in-out;
+            text-align: inherit;
+        }
+
+        #loading-container {
+            display: none;
+            width: 100%;
+            height: 20px;
+            background-color: #CCCCFF;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        #loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: #bd68ee;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .love-container span {
+            position: fixed;
+            animation: fly 5s linear infinite;
+            transition: opacity 1s ease-in-out;
+            /* Tambahkan transisi opacity */
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>alloooo <span style="color: #c77dff;">reejuuun!</span><br>hhe welkamm
+    </h1>
+    <label for="tanggal">areeej, hari ini tanggal berapaa??<p></label>
+    <input type="number" id="tanggal" min="1" max="31">
+    <button style="font-family: poppins;" onclick="tampilkanMotivasi()">Input</button>
+    <button style="font-family: poppins;" onclick="munculkanLove()">🎂🤍</button>
+    <div id="loading-container">
+        <div id="loading-bar"></div>
+    </div>
+    <div id="motivation"></div>
+
+
+    <audio id="Audio">
+        <source src="Music/HBD1.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="myAudio">
+        <source src="Music/juun78.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <script>
+
+        function tampilkanMotivasi() {
+            var tanggalInput = document.getElementById("tanggal").value;
+            var motivasiDiv = document.getElementById("motivation");
+            var loadingContainer = document.getElementById("loading-container");
+            var loadingBar = document.getElementById("loading-bar");
+
+            // Reset loading bar width
+            loadingBar.style.width = '0%';
+
+            // Show loading container
+            loadingContainer.style.display = "block";
+
+            // Simulate delay and update loading bar width
+            var interval = setInterval(function () {
+                var currentWidth = parseInt(loadingBar.style.width) || 0;
+                if (currentWidth < 100) {
+                    loadingBar.style.width = (currentWidth + 10) + '%';
+                } else {
+                    // Hide loading container and clear interval after completion
+                    clearInterval(interval);
+                    loadingContainer.style.display = "none";
+
+                    // Retrieve and display motivation
+                    var motivasi = getMotivasiByTanggal(tanggalInput);
+                    motivasiDiv.innerHTML = motivasi;
+                    // Play audio if tanggalInput is 1
+                    if (tanggalInput === "78") {
+                        var audio = document.getElementById("myAudio");
+                        audio.play();
+                    }
+                    // Play audio if tanggalInput is 1
+                    if (tanggalInput === " ") {
+                        var audio = document.getElementById("Audio");
+                        audio.play();
+                    }
+                }
+            }, 250); // Adjust the interval duration for smoother progress
+        }
+        function munculkanLove() {
+            var loveContainer = document.createElement('div');
+            loveContainer.className = 'love-container';
+            document.body.appendChild(loveContainer);
+
+            // Maksimum jumlah emoji yang ingin ditampilkan
+            var maxLoveCount = 78;
+
+            var loveElements = []; // Array untuk menyimpan referensi emoji love
+
+            for (var i = 0; i < maxLoveCount; i++) {
+                var love = document.createElement('span');
+                love.innerHTML = '💜';
+
+                // Generate random positions within the viewport
+                var randomLeft = Math.random() * (window.innerWidth - 30); // 30 is the width of the emoji
+                var randomTop = Math.random() * (window.innerHeight - 30); // 30 is the height of the emoji
+
+                love.style.left = randomLeft + 'px';
+                love.style.top = randomTop + 'px';
+
+                loveContainer.appendChild(love);
+                loveElements.push(love); // Tambahkan emoji love ke dalam array
+            }
+            // Play audio jika emoji love ditampilkan
+            var audio = document.getElementById("Audio");
+            audio.play();
+            // Jalankan fungsi untuk memudarkan emoji love secara berurutan
+            fadeOutLove(loveElements, loveContainer);
+        }
+
+        function fadeOutLove(loveElements, loveContainer) {
+            // Atur timeout untuk memulai pemudaran setelah durasi animasi terbang selesai (5000ms)
+            setTimeout(function () {
+                // Pemudaran berurutan dengan interval
+                var interval = setInterval(function () {
+                    if (loveElements.length > 0) {
+                        var love = loveElements.shift(); // Ambil emoji love pertama dari array
+                        love.style.opacity = 0; // Set opacity menjadi 0 untuk memudarkan
+
+                        // Hapus emoji love setelah selesai memudar
+                        setTimeout(function () {
+                            love.remove();
+                        }, 1000); // Tambahkan waktu delay setelah memudar (1000ms)
+                    } else {
+                        clearInterval(interval); // Hentikan interval setelah semua emoji love memudar
+                        // Hapus container love setelah semua emoji love memudar
+                        setTimeout(function () {
+                            loveContainer.remove();
+                            // Setelah loveContainer dihapus, munculkan teks "HBD AREEEJ"
+                            var birthdayText = document.createElement('div');
+                            birthdayText.textContent = "pibesdeyy cutieee🫶";
+                            birthdayText.style.fontSize = '24px';
+                            birthdayText.style.fontWeight = 'bold';
+                            birthdayText.style.color = '#c77dff';
+                            birthdayText.style.textAlign = 'center';
+                            document.body.appendChild(birthdayText);
+                            // Cari elemen motivasi
+                            var motivasiDiv = document.getElementById('motivation');
+
+                            // Sisipkan elemen teks "HBD AREEEJ" sebelum elemen motivasi
+                            motivasiDiv.parentNode.insertAfter(birthdayText, motivasiDiv);
+                            // Hapus teks "HBD AREEEJ" setelah 3 detik
+                            setTimeout(function () {
+                                birthdayText.remove();
+                            }, 9000);
+                        }, 1000); // Tambahkan waktu delay sebelum munculkan teks (1000ms)
+                    }
+                }, 300); // Interval 500ms antara setiap emoji love yang memudar
+            }, 700); // Tunggu 5 detik sebelum memulai pemudaran (sama dengan durasi animasi terbang)
+        }
+
+
+        function getMotivasiByTanggal(tanggal) {
+            switch (tanggal) {
+                case "1":
+                    return "Whoaaa memasuki awal bulan<br><br>Semangat trs yaaa, jngn prnh merasa sendiri, masih ada banyak orang who love youu, masih ada banyak orng who will support you.<br><br>Have a nice day areejj<br><br>*btw ndak mw dijawab pertanyaannya juun? hmm ragu kah?";
+                case "2":
+                    return "eyyooo wasappp<br><br>Gmna juun, udh berdamai dengan diri sendri krna sudah terlahir di dunia ini hmm? <br><br>Ktnya kan sebelum lahir kita diliatin cuplikan klo kita memilih hidup, bhkan malaikat mastiin kita berkali kali apa kita yakin utk mmilih hidup, yeahh nyatanya skrng kita udh ada di kehidupan ini<br><br>Jdi dsni ak cma mw bilang, seberat apapun hidupmu saat ini, sekeras apapun kehidupan yg sedang kmu jalani, pasti ada hal baik yang akan terjadi nnti<br><br>Tenaaaang, sesuatu yg memang udh mnjdi hakmu ndak akan hilang atau keliru<br><br>I’m here, klo km butuh someone to talk, telingaku siap mendengar ocehanmu hho, jangan sungkan sungkan yaaa<br><br>Ogheyyy semangat menjalani aktivitasmu hari inii ariiij<br><br>Papaiii<br><br>*beydewey pertanyaannya blm mw dijawab?";
+                case "3":
+                    return "Rumus hari ini<br><br>YAKIN BISA!<br><br>HARUS BISA!<br><br>PASTI BISA!<br><br>Semangattt reejuuun, u can do it!";
+                case "4":
+                    return "Hai hai haii<br><br>Banyak tugas ya juun? Ttp semangat yaa, walaupun jadwalmu padat tugas tapi jangan sampai lupa jaga Kesehatan<br><br>Don’t pressure urself too much, u did ur best no matter how tired and trained you are, proud of you<br><br>Tanganmu cuma dua, jangan km paksakan buat genggam semuanya, klo butuh bantuan bilang, selagi ak bisa bantu nnti kubantu, ko mw cerita gpp cerita aja bebas tinggal telfon ajaa yaaa<br><br>ogheyyy hawitingg! <br><br>*ketik 10 untuk mendapatkan ess krimm";
+                case "5":
+                    return "-Reminder-<br><br>Jangan terlalu fokus sama hasil, karena kmu terlalu fokus pada hasil<br><br>Kamu terlalu khawatir akan masa yang belum pasti, kamu khawatir kalo kamu bakalan gagal, kamu khawatir kalo apa yang kamu kerjakan sekarang, bakalan engga sesuai sama ekspektasi kamu, kamu takut kecewa, kamu takut apa yang kamu kerjain sekarang malah ujung-ujungnya bakalan sia-sia. <br><br>Padahal sebenernya mungkin ketakutan yang kamu rasakan sekarang, belum tentu terjadi. Makanya kamu sulit fokus dan engga konsisten sama apa yang kamu kerjakan sekarang. <br><br>Kamu engga yakin sama diri kamu, kamu terlalu pesimis akan hal yang kSSSamu kerjakan sekarang.";
+                case "6":
+                    return "ngapaiSn nginput tanggal 6 _-<br>belum waktunyaaaa, ini msh tgl brpa jugaaa<br>yeuuuu";
+                case "7":
+                    return "batu dibilangin huh_-";
+                case "8":
+                    return "gtw gtww";
+                case "9":
+                    return "hmmm, liat tanggal";
+                case "10":
+                    return "Yeayyy it’s ur dayy!<br><br> On this special day, I want to take a moment to wish u the happiest birthday. <br> Today, I hope all the luv and joy u’ve given to others come back to you . <br> May ur day be filled with laughter, surrounded by friends and family who adore you just as much as I do hho. <br> May ur dreams and ur aspirations be realized. <br> This year, I wish for u a world of beautiful moments, adventures, and endless happiness. <br>  Thank u for being the wonderfull person you are. Pibesdeyy cutieee<br><br> Semua do’a yang terbaik buat kmu. <br>Semoga hal-hal baik yang membuat km runtuh turut menjadi alasanmu untuk tumbuh. <br>Banyak hal yang membuatmu runtuh, tpi banyak juga hal yang sudah mebuatmu tumbuh. <br>All the best on your special day. <br>Semoga harapan kamu bisa tercapai sesuai dengan yang kamu mau. <br>Semoga banyak pencapaian yang kamu dapatkan di umur kamu yang baru ini. <br>Semoga selalu diberi kelancaran dalam segala urusan dan kegiatan yang kamu lakuin, sukses terus dalam pendidikan maupun karirmu nanti. <br>Sekarang udah sama sama punya kehidupan baru dan lingkungan baru, semoga kamu lebih nyaman dan bahagia terus dan semoga kamu selalu di kelilingi sama orang orang baik yang bakal nemenin kamu terus yaaaa. <br><br>aaaaaa sayang bngt sama ariiiij, tpi sayang arijnya ngga mwehehe. <br><br> You will always be someone that I admire, I will always be looking at you from afar. <br> And even though we didn't end up being together. <br> I’m so grateful to have known u in my life. <br>Yeahh I will always constantly praying for youu";
+                case "11":
+                    return "no comment";
+                case "12":
+                    return "BELUM WAKTUNYAAAA AREEEJJ_-";
+                case "13":
+                    return "minimal liat tanggal lah yaaa";
+                case "14":
+                    return "ngapainnn?? huss huss";
+                case "15":
+                    return "gtw gelapp";
+                case "16":
+                    return "indonesia malaysiaa bekasi weeee";
+                case "17":
+                    return "wleowleo";
+                case "18":
+                    return "ndaa ada apaa apaaa, ngapainn_-";
+                case "19":
+                    return "hhe";
+                case "20":
+                    return "wleoowleooo";
+                case "21":
+                    return "tgl 21_-";
+                case "22":
+                    return " 1+2*4+70(8+50)*78 berapa juun?";
+                case "23":
+                    return "apa yaaaa";
+                case "24":
+                    return "hewan, hewan apa yang";
+                case "25":
+                    return "liat tanggal woeeee";
+                case "26":
+                    return "juun, gpp manggil doang hho";
+                case "27":
+                    return "p<br>paket";
+                case "28":
+                    return "capek ya? sama saia pun";
+                case "29":
+                    return "sdbkjasbkhdklpyghta";
+                case "30":
+                    return "tahukah kamu?";
+                case "31":
+                    return "Alloooo areeej, how’s ur day? I hope everythings ogheyyy. <br><br>Singkat saja, mmm sbnrnya ini semacam jalan tengah yg bisa ak lakuin, ak gtw bingung nyari jalan keluar gmna, akooo binguuung hmzzz.<br><br>Jdi ya ak buatin ini buat areeeej, ini tuh semacam daily motivation mybe, jdi nnti setiap hari arij mampir kesini yaa nginput sesuai tanggal nnti bakal muncul sebuah kata kata entah itu motivasi buat arij atau apalah, intinya support buat arij! Hho, gtw sih km bakal seneng apa ndak, yah yg penting ak udh usaha mencari jalan keluar buat our communication yg akhir akhir ini kurengg baik, disisi lain ak pngn nyupport km, tpi disisi lain arij kynya malazz menanggapi klo ak chat, so yeah jdilah web ini hho. <br><br>Aku izin ngeluarin unek unek yaaa,Arij knp sih kok suka bikin bingung yaa, klo ditanya pun ndak jwb betul betul betul, ak bingung juun sebetulnya arah bicaramu itu kmnaa, km inget wktu itu km ngetik panjang lebar minta maaf trs ak di block? Knp km minta maaf berulang ulang? Smpe saat ini pun ak gtw jwbn pastinya gmna, km jwbnya tikel tikel doang hmzz, ak gtw  itu km emng pngn lost contact atau kode buatku, wkwk apalah apalah maap trllu PD. <br><br>Yeahh I can't lie to my own feelings, if u r asking is it still? Yapss still, why? Idk.<br>Klo km nnya ak seneng ndak wktu bulan” kmren sering tlponan, ya seneng juun, seneng bngt juun. Baper? Pke nnya. <br><br>Km inget wktu itu pas telfonan km panggil ‘sayang’. Ak ngefrezee dag dig dug berusaha stay cool. Ak gtw km itu emng serius apa cman candaan doang, takutnya akunya yg emng ke ge er an doang mwehehe. <br><br>Jdinya ya agak goyah pendirianku juun berteman tnpa melibatkan lav luv lav luv, mmm wktu itu emng ak sngja membatasi diri komunikasi juun, agak jkhdwzzxwk jg kdng kl ak tnya km jawabnya tikel tikel and tikel huh shibal, iya ak tw km buat status sad ak gtw itu km bikin status gtu ngode supaya di bls apa gmna hho, mngkin ngga ya, maap ke ge er an mwehehe, aslinya pngn komen, cman gtw aku mikirnya ya itu cman status doang (mencoba untuk tyduck ge er). <br><br>and then bbrpa hari kemudian km ngechat kan, yang gitu kmu, udh ga butuh aku ya blab bla bla. Dstu lah muncul lg rasa ke ge er an koooh, bilang kangen pulaa, besok besoknya ak lmyan sering ngechat duluan kan ituu, ya meskipun satu dua kali lagi dan lagi arij klo ditanya ga dijawab huh shibal.<br><br>Puncaknya ya kmren kmren itu pas ak memberanikan diri nelfon arij, kirain bakal seneng apa gmna, nyatanya dpet respon yg kureng mengenakkan, but it’s fine setiap orng pnya cara pandangnya masing masing, klo km mandang ak bgtu ya sah sah saja toh yg pnya pikiran kan arij, tugasku ya cma meluruskan, urusan prcya apa ndaknya ya kembali lg ke dirimu.<br><br>So to make it clear, buat menjawab pertanyaan pertanyaan yg sering berkeliaran di pikiranku, I want to ask uuu, maap klo agak sdkit frontal, sooo do u have the same feelings as me? Do u have feelings for me?, jawab yaaa, dikarenakan arij biasanya malas ngetik jdi udh kubuatin tuh polling di wasappp, mw buat fitur supaya arij bisa nginput pesan dsni agak ribet algoritmanya, jdi ya seadanya dlu web nya, mngkin kedepannya bakal ak tambahin klo dh jago hho, tinggal pilih aja y/n? ogheyyy?, supaya aku ngga dihantui pertanyaan yg trs trsan muter di dlm palaku, plizzzz.<br><br>Maap ya atas sifat jelekku yang sering mood swing bngt, sbnrnya klo ak ngechat arij itu ada rasa antusiasme tersendiri, jdi klo ngga mendapat respon yg sesuai ekspektasiku ya agak gmna gtuuu, mw mncba aku ilangin agak susah, kya udh otomatis gtuu huuftt.<br><br>Ngga ak ga marah, punya ekspektasi itu manusiawi dan kecewa adalah hal wajar dalam kehidupan yang harus kita jalani, akupun sllu menanamkan prinsip semakin ikhlas semakin tenang, belajar untuk berlapang dada krna ndak semua yg kita inginkan itu bakal terwujud semua, jdi ya sesulit apapun keeadan yg ak hadapi, I always teach my heart supaya dapat menerima keadaan tanpa membenci, sooo arij jangan merasa bersalah yaaaa! <br><br>Mungkin itu aja juun, whoaaa sangad singkat ya bu hho, yg sehat sehat ya juun, semangat jg kuliahnya, mngkin bbrpa minggu lg ujian yaaa, semangat naikin IP muu hhoo, hwaitingggg!!!<br><br>Makasiiii udh baca smpe slsaiii, semoga suka yaa sama web sederhana buatanku inii<br><br>Papaaiiii";
+                case "78":
+                    return "n3^07!";
+                // Tambahkan case untuk tanggal lain di sini
+                default:
+                    return "tanggal berapa itu heh, ngga ada di kalender ish _-<br>yeuuu";
+            }
+        }
+    </script>
+</body>
+
+</html>

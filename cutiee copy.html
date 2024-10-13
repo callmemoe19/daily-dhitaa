@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+    <title>daily-faraaa</title>
+    <style>
+        body {
+            font-family: 'Poppins';
+            text-align: center;
+            margin: 50px;
+            background-color: #ffd6ff;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            text-align: center;
+            height: 20px;
+            width: 40px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            color: #3d405b;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px;
+            font-size: 14px;
+            background-color: #c77dff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #motivation {
+            margin-top: 20px;
+            font-size: 15px;
+            background-color: #CCCCFF;
+            color: black;
+            animation: fadeIn 1s ease-in-out;
+            text-align: inherit;
+        }
+
+        #loading-container {
+            display: none;
+            width: 100%;
+            height: 20px;
+            background-color: #CCCCFF;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        #loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: #bd68ee;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .love-container span {
+            position: fixed;
+            animation: fly 5s linear infinite;
+            transition: opacity 1s ease-in-out;
+            /* Tambahkan transisi opacity */
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>alloooo <span style="color: #c77dff;">faraaaa!</span><br>hhe welkamm
+    </h1>
+    <label for="tanggal">faraaa, hari ini tanggal berapaa??<p></label>
+    <input type="number" id="tanggal" min="1" max="31">
+    <button style="font-family: poppins;" onclick="tampilkanMotivasi()">Input</button>
+    <!-- <button style="font-family: poppins;" onclick="munculkanLove()">🤍</button> -->
+    <div id="loading-container">
+        <div id="loading-bar"></div>
+    </div>
+    <div id="motivation"></div>
+
+
+    <audio id="Audio">
+        <source src="Music/Butterfly.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="myAudio">
+        <source src="Music/juun78.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <script>
+
+        function tampilkanMotivasi() {
+            var tanggalInput = document.getElementById("tanggal").value;
+            var motivasiDiv = document.getElementById("motivation");
+            var loadingContainer = document.getElementById("loading-container");
+            var loadingBar = document.getElementById("loading-bar");
+
+            // Reset loading bar width
+            loadingBar.style.width = '0%';
+
+            // Show loading container
+            loadingContainer.style.display = "block";
+
+            // Simulate delay and update loading bar width
+            var interval = setInterval(function () {
+                var currentWidth = parseInt(loadingBar.style.width) || 0;
+                if (currentWidth < 100) {
+                    loadingBar.style.width = (currentWidth + 10) + '%';
+                } else {
+                    // Hide loading container and clear interval after completion
+                    clearInterval(interval);
+                    loadingContainer.style.display = "none";
+
+                    // Retrieve and display motivation
+                    var motivasi = getMotivasiByTanggal(tanggalInput);
+                    motivasiDiv.innerHTML = motivasi;
+                    // Play audio if tanggalInput is 1
+                    if (tanggalInput === "78") {
+                        var audio = document.getElementById("myAudio");
+                        audio.play();
+                    }
+                    // Play audio if tanggalInput is 1
+                    if (tanggalInput === " ") {
+                        var audio = document.getElementById("Audio");
+                        audio.play();
+                    }
+                }
+            }, 250); // Adjust the interval duration for smoother progress
+        }
+        function munculkanLove() {
+            var loveContainer = document.createElement('div');
+            loveContainer.className = 'love-container';
+            document.body.appendChild(loveContainer);
+
+            // Maksimum jumlah emoji yang ingin ditampilkan
+            var maxLoveCount = 100;
+
+            var loveElements = []; // Array untuk menyimpan referensi emoji love
+
+            for (var i = 0; i < maxLoveCount; i++) {
+                var love = document.createElement('span');
+                love.innerHTML = '💜';
+
+                // Generate random positions within the viewport
+                var randomLeft = Math.random() * (window.innerWidth - 30); // 30 is the width of the emoji
+                var randomTop = Math.random() * (window.innerHeight - 30); // 30 is the height of the emoji
+
+                love.style.left = randomLeft + 'px';
+                love.style.top = randomTop + 'px';
+
+                loveContainer.appendChild(love);
+                loveElements.push(love); // Tambahkan emoji love ke dalam array
+            }
+            // Play audio jika emoji love ditampilkan
+            var audio = document.getElementById("Audio");
+            audio.play();
+            // Jalankan fungsi untuk memudarkan emoji love secara berurutan
+            fadeOutLove(loveElements, loveContainer);
+        }
+
+        function fadeOutLove(loveElements, loveContainer) {
+            // Atur timeout untuk memulai pemudaran setelah durasi animasi terbang selesai (5000ms)
+            setTimeout(function () {
+                // Pemudaran berurutan dengan interval
+                var interval = setInterval(function () {
+                    if (loveElements.length > 0) {
+                        var love = loveElements.shift(); // Ambil emoji love pertama dari array
+                        love.style.opacity = 0; // Set opacity menjadi 0 untuk memudarkan
+
+                        // Hapus emoji love setelah selesai memudar
+                        setTimeout(function () {
+                            love.remove();
+                        }, 1000); // Tambahkan waktu delay setelah memudar (1000ms)
+                    } else {
+                        clearInterval(interval); // Hentikan interval setelah semua emoji love memudar
+                        // Hapus container love setelah semua emoji love memudar
+                        setTimeout(function () {
+                            loveContainer.remove();
+                            // Setelah loveContainer dihapus, munculkan teks "HBD AREEEJ"
+                            var birthdayText = document.createElement('div');
+                            birthdayText.textContent = "hwaitingg cutieeee🫶";
+                            birthdayText.style.fontSize = '24px';
+                            birthdayText.style.fontWeight = 'bold';
+                            birthdayText.style.color = '#c77dff';
+                            birthdayText.style.textAlign = 'center';
+                            document.body.appendChild(birthdayText);
+                            // Cari elemen motivasi
+                            var motivasiDiv = document.getElementById('motivation');
+
+                            // Sisipkan elemen teks "HBD AREEEJ" sebelum elemen motivasi
+                            motivasiDiv.parentNode.insertBefore(birthdayText, motivasiDiv);
+                            // Hapus teks "HBD AREEEJ" setelah 3 detik
+                            setTimeout(function () {
+                                birthdayText.remove();
+                            }, 5000);
+                        }, 300); // Tambahkan waktu delay sebelum munculkan teks (1000ms)
+                    }
+                }, 300); // Interval 500ms antara setiap emoji love yang memudar
+            }, 1500); // Tunggu 5 detik sebelum memulai pemudaran (sama dengan durasi animasi terbang)
+        }
+
+        function getMotivasiByTanggal(tanggal) {
+            switch (tanggal) {
+                case "1":
+                    return "not found 404";
+                case "2":
+                    return "not found 404";
+                case "3":
+                    return "not found 404";
+                case "4":
+                    return "not found 404";
+                case "5":
+                    return "eyyooo wasssapp<br><br>selamat berlibur juun, jangan lupa makan istirahat yang cukup, ingat kamu cma ada satu di dunia inii😾makhluk langka, wajib dilestarikan hho <br><br>oh iya meskipun wikenn janlup tugas dikerjain mwehehee<br>papaaii";
+                case "6":
+                    return "Ternyata banyak hal dalam hidup yg membutuhkan proses<br>termasuk Gagal, yapss gagal adalah bagian dari proses itu, karena di balik gagal pasti ada pembelajaran.<br><br>Kamu tw NASA rij? Ya betul, sebagai gudangnya ilmuwan roket terbaik di dunia, NASA punya sebuah dokumen Kumpulan kegagalan yg namanya <i> “Flight Rules” </i>. <br>Isinya itu rekaman semua kesalahan, miskalkulasi, dan error yg terjadi di masa lalu, sebagai panduan untuk ngerjain misi mereka supaya lebih baik di masa depan. <br>nah sejak 1960, semua ini didokumentasikan lengkap beserta dengan solusi yg mereka temukan. <br><br>So yeah, I just wanna tell you <br> Bertumbuh bukan berarti harus selalu berhasil. <br>Bertumbuh bukan berarti menjauhi kegagalan. <br>Bertumbuh itu proses belajar dari semua situasi, baik keberhasilan maupun kegagalan. <br><br> Selamat menghabiskan ‘jatah’ gagal rij<br>Aku tunggu catatan <i> “Flight Rules”</i> versi kamu!. <br><br>Selamat beraktivitas kembali di hari senin yang aksjysiuoaslkjsl ini hho, semangaattt! <br><br>Papaiii.";
+                case "7":
+                    return "aloooo reejuuun <br><br> today i just wnna say<br><br>Don’t measure your progress using someone else’s ruler hho.<br>The succes of your life is measures by ur own ruler<br><br>ttp semangattt ariijjj, papaiii";
+                case "8":
+                    return "Reej, cba deh km lakuin ini setiap pagi sebelum beraktivitas<br><br> - Pertama, km tulis 10 hal yang penting trs km pilih aja 3 dri 10 yang paliiiing penting untuk km slsaikan hari ini<br><br>- Yang kedua, cba tulis 5 kekurangan diri kita trs tingkatkan kembali sekiranya bisa kita atasi.<br><br>- Yang terkahir cba km tulis 5 keunggulan km, lalu pikirkan bagaimana caranya supaya skill kita itu bisa menghasilkan income atau ditukar dengan sesuatu yang bervalue.<br><br>Semangat for todayy areeeej";
+                case "9":
+                    return "libur yaaaa?<br>turuu dah seharian awkwk<br><br>Tapi jangan lupa kerjakan tugasmu yg buanyakk itu anak mudaa😋🫵🏻<br>zemangattt areeej";
+                case "10":
+                    return "Yeayyy it’s ur dayy!<br><br> On this special day, I want to take a moment to wish u the happiest birthday. <br> Today, I hope all the luv and joy u’ve given to others come back to you . <br> May ur day be filled with laughter, surrounded by friends and family who adore you just as much as I do hho. <br> May ur dreams and ur aspirations be realized. <br> This year, I wish for u a world of beautiful moments, adventures, and endless happiness. <br>  Thank u for being the wonderfull person you are.<br> Pibesdeyy cutieee<br><br> Semua do’a yang terbaik buat kmu. <br>Semoga hal-hal baik yang membuat km runtuh turut menjadi alasanmu untuk tumbuh. <br>Banyak hal yang membuatmu runtuh, tpi banyak juga hal yang sudah mebuatmu tumbuh. <br>All the best on your special day. <br>Semoga harapan kamu bisa tercapai sesuai dengan yang kamu mau. <br>Semoga banyak pencapaian yang kamu dapatkan di umur kamu yang baru ini. <br>Semoga selalu diberi kelancaran dalam segala urusan dan kegiatan yang kamu lakuin, sukses terus dalam pendidikan maupun karirmu nanti. <br>Sekarang udah sama sama punya kehidupan baru dan lingkungan baru, semoga kamu lebih nyaman dan bahagia terus dan semoga kamu selalu di kelilingi sama orang orang baik yang bakal nemenin kamu terus yaaaa. <br><br>aaaaaa sayang bngt sama ariiiij, tpi sayang arijnya ngga mwehehe. <br><br> You will always be someone that I admire, I will always be looking at you from afar. <br> And even though we didn't end up being together. <br> I’m so grateful to have known u in my life. <br>Yeahh I will always constantly praying for youu<br><br>Stay healthy yaaaa, semoga bahagia selaluuuu<br><br>Papaaiii.";
+                case "11":
+                    return "eyyy youu<br>look at ur mom and dad<br>they are tired<br>and u r still enjoying ur life<br>come onn, bangun portfoliomu, buat personal branding, kembangkan skillmu<br>it’s time to take ur life serious<br>and make them proudd 👊<br><br>*aloo ariij, km ini no comment atau emng kmren ndak buka web ini juun?<br>klo iya udh dibaca konfirmasi yaaa, nnti mw ak gnti myuuziknya<br><br>Papaiii.";
+                case "12":
+                    return "yaaah km ndak mampir tiap hari trnyta, hmmm jdi ndak mood lanjutin klo tw kya gni mah hho, but it's ok bukan salahmu, toh ini juga yang mw buat ginian kan ak bukan permintaan dri arij, ya fine fine aja sbnrnya tiap hari mw mampir apa ndak.<br><br>cman yaa agak sdkit kecewa gtu lhoo rasanyaa, rasanya kaya apa yg aku lakuin ini cman angin yg lewat aja, bukan ak haus apresiasi haus pujian atau haus penghargaan atas apa yg ak lakukan, tpi rasanya usahaku kaya sia sia gtu lhoo, cukup km mampir tiap hari aja kesini udh sangat berterimakasih juun, itu udh sangat sangat mengapresiasi apa yg ak buat, syukur syukur km kasih feedback ntah km balas apa atau apa di WA, kya bln kmren yg ice creamm itu senang bngt bngt akuu hho, niatnya mw ak buat fitur reply tpi yah agak susah, ak blm menguasai hmmm.<br><br>tapi ya balik lg, ini semua trgntung dirimu out of my control, ini jg ak sndri yg ngide buat kaya gni, bukan tuntutanmu, yah ak pribadi sulit memang menghindari persaaan kaya gni juun, u can close ur eyes to things u don't want to see, but.. u can't close ur heart to things u don't want to feel, right?<br><br>Okeeey, ttp semangat menjalani hari harimuu juun (besok senin wkwkw), ini hanya sedikit keluh kesahkuu, mksh jg udh baca smpe akhirr, I really appreciate that, tingkyuuu.<br><br>klo iya udh dibaca konfirmasi yaaa, nnti mw ak gnti myuuziknya<br><br>Papaiii";
+                case "13":
+                    return "not found 404";
+                case "14":
+                    return "not found 404";
+                case "15":
+                    return "not found 404";
+                case "16":
+                    return "aloooo i’m backk hho, klo udh lewat hari rabu tuh rasanya arghhh legaaa<br><br>gmna harimu akhir-akhir ini?<br>are u okee hmm? <br>If not, I hope soon u’ll get better<br>don’t pressure urself to much, no matter how tired u are, remember to take a rest yaaaa :) <br><br>I know u're tired and stressed.<br>bnyak tugas ini tugas ituu,<br>but pleaase keep battling and be gentle with urself,<br>u did great today,<br>u got this far,<br>u’re sooo bravee,<br>yeaahh I’m so proud of youu!!<br>sending virtual hugs🫂<br><br>Semangatt yaaaa<br>Papaaiii";
+                case "17":
+                    return "eyyyoo, how’s ur day?? I hope everythings is good<br>ak tdi baca buku, membahas tentang Mindset.<br>tentunya kita sadar mw sebagus apapun strateginya, <br>kalau dri awal mindset-nya salah, maka manfaatnya ga bakal bertahan lama, <br>u’ll just be miserable. Bakal cepat lupa dan akhirnya kita capek doang. <br><br>Kita ambil contoh, semisal kita niatin belajar keras biar bisa kalahin tmn sekelas, <br>yang ada adalah siklus kecemasan yang tidak akan berhenti. <br>Karena membandingkan diri sama orang lain itu ga ada batasnya, right? <br>Iya, kadang reward-nya ada, tapi hanya short-term<br><br>In the end, cara terbaik dan tersehat yang bisa kita lakukan adalah<br>Meniatkan kerja keras dan proses belajar ini untuk kebaikan diri kita dan orng orng yang kita sayangi, <br>gimana maksudnya?? <br><br>Ya kita bertekad untuk berusaha sebaik mungkin agar bisa membangun masa depan yang baik, <br>membanggakan orng tua, dan tentunya diri kita sendiri, <br>mungkin terdengar klise, <br>tapi menurutku kalimat kalimat “demi kebaikan diri kita dan orang disekitar kita” itu ga hitam-putih dan bisa diartikan ke berbagai aspek.<br><br>selamat menikmati hari libur areeej<br>Papaiii.<br> *ada request musik?";
+                case "18":
+                    return "eyyy youu<br>gmna wikennyaa hho? <br> menyenangkan or membosankan?<br>Masih relate dengan kmren, <br>ak nemu sebuah kutipan “Just do ur best in everything u do, leave no regrets, accept and learn, then trust it god” <br><br>So, yeah. <br>Kita harus hidup dan kerja keras untuk diri kita sendiri dan orng yang kita sayangi. <br>Hopefully, at the same time, ilmu dan tekad ini jg bisa membawa pengaruh yang baik ke orng orng disekitar kita. <br>Satu hal yang perlu diingat, <br>kita kerja keras bukan untuk tujuan orng lain, <br>jadi ga perlu kita samakan hidup kita dengan hidup orng lain, okaaaay?<br><br>Good!<br>Papaiii.<br><br>*maap agak mlm uploadnya, dri pagi bru buka lptop skrng hho.<br>klo pagi km buka blm ada brrti ak upload mlm yaa,<br>sblm tdr boleh itu buka ini dlu hhe<br>entah itu km buka tiap hari atau ngga, I just want to support you sebisa mungkin,<br> okeee ttp semangat yaaaa";
+                case "19":
+                    return "not found 404";
+                case "20":
+                    return "eyyy youu<br>gomenn, kmren ak ga upload hho <br>gmna senin inii? Seruu? wkwkw<br>Arij gmna?<br>masih sering insecure sama tmn tmnmu hmm?? <br>Harus ttp optimis yaaa<br><br>It’s totally fine to make mistakes, <br>cz from there u can dictate ur weakness. <br>Then, make sure that it won’t be ur weakness anytime soon. <br><br>Temukan kelemahanmu, and  thenn pastikan klo itu tidak akan jdi kelemahanmu lagii.<br>Jangan prnh membandingkan dan menyamakan kemampuan dirimu sma orng lain, cukup dijadikan motivasi saja. <br>Skill orng beda beda, <br>so cari cara bljr yang cooocok dengan dirimu, bukan orng lain. <br><br>okeeey cutieee? <br>nah goood. semangatt yaaa<br>Papaiii. ";
+                case "21":
+                    return "not found 404";
+                case "22":
+                    return "not found 404";
+                case "23":
+                    return "not found 404";
+                case "24":
+                    return "not found 404";
+                case "25":
+                    return "not found 404";
+                case "26":
+                    return "not found 404";
+                case "27":
+                    return "not found 404";
+                case "28":
+                    return "not found 404";
+                case "29":
+                    return "not found 404";
+                case "30":
+                    return "not found 404";
+                case "31":
+                    return "not found 404";
+                case "78":
+                    return "n3^07!";
+                // Tambahkan case untuk tanggal lain di sini
+                default:
+                    return "tanggal berapa itu heh, ngga ada di kalender ish _-<br>yeuuu";
+            }
+        }
+    </script>
+</body>
+
+</html>
