@@ -1,0 +1,87 @@
+body {
+  font-family: "Poppins";
+  text-align: center;
+  margin: 50px;
+  background-color: #ffd6ff;
+}
+
+h1 {
+  color: #333;
+}
+
+input {
+  text-align: center;
+  height: 20px;
+  width: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  color: #3d405b;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #c77dff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#motivation {
+  margin-top: 20px;
+  font-size: 15px;
+  background-color: #ccccff;
+  color: black;
+  animation: fadeIn 1s ease-in-out;
+  text-align: inherit;
+}
+
+#loading-container {
+  display: none;
+  width: 100%;
+  height: 20px;
+  background-color: #ccccff;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+#loading-bar {
+  height: 100%;
+  width: 0;
+  background-color: #bd68ee;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.love-container span {
+  position: fixed;
+  animation: fly 5s linear infinite;
+  transition: opacity 1s ease-in-out;
+  /* Tambahkan transisi opacity */
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-100vh);
+  }
+}
