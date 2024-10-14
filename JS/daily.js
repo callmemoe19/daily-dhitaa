@@ -139,9 +139,9 @@ function getMotivasiByTanggal(tanggal) {
     case "14":
       return "alooo faraaa, hari ini cuma mau ngingetin ajaa,<br>kesuksesan orang lain itu bukan kegagalan kita lhooo,<br>jadi kita ndak perlu memaksakan 'harus' lebih hebat dari orng lain,<br>lebih baik dari kmrin saja sudah cukup.<br><br>everythings gonna be finee, tenang ajaaa<br><br>Have a nice day Faraaa<br><br>*input angka 20 klo mau eskriiimmm hhi.";
     case "15":
-      return "gtw gelapp";
+      return "ini buat besoook";
     case "16":
-      return "indonesia malaysiaa bekasi weeee";
+      return "ini jugaa buat besok besok";
     case "17":
       return "aishhh";
     case "18":
@@ -169,7 +169,7 @@ function getMotivasiByTanggal(tanggal) {
     case "29":
       return "sdbkjasbkhdklpyghta";
     case "30":
-      return "1 + 1 = .... berapa coba";
+      return "-";
     case "31":
       return "ini buat akhir bulan, ngapain gabut bngt nginput tgl 31 huh";
     case "78":
