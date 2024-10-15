@@ -139,7 +139,7 @@ function getMotivasiByTanggal(tanggal) {
     case "14":
       return "alooo faraaa, hari ini cuma mau ngingetin ajaa,<br>kesuksesan orang lain itu bukan kegagalan kita lhooo,<br>jadi kita ndak perlu memaksakan 'harus' lebih hebat dari orng lain,<br>lebih baik dari kmrin saja sudah cukup.<br><br>everythings gonna be finee, tenang ajaaa<br><br>Have a nice day Faraaa<br><br>*input angka 20 klo mau eskriiimmm hhi.";
     case "15":
-      return "ini buat besoook";
+      return "Hey youu,<br>buat bahagiamu sendiri, bahagiamu ditanganmu sendiri, ndak usah buang pikiran dan tenaga buat orang yg ndak pernah menghargaimu.<br>semangattt faraaa";
     case "16":
       return "ini jugaa buat besok besok";
     case "17":
