@@ -87,7 +87,7 @@ function fadeOutLove(loveElements, loveContainer) {
           loveContainer.remove();
           // Setelah loveContainer dihapus, munculkan teks "HBD AREEEJ"
           var birthdayText = document.createElement("div");
-          birthdayText.textContent = "hwaitingg cutieeee🫶";
+          birthdayText.textContent = "semangatt faraaaa🫶";
           birthdayText.style.fontSize = "24px";
           birthdayText.style.fontWeight = "bold";
           birthdayText.style.color = "#c77dff";
@@ -143,7 +143,7 @@ function getMotivasiByTanggal(tanggal) {
     case "16":
       return "eyyyoo faraaaa, how’s ur day?? I hope everythings is good<br>ak tdi baca buku, membahas tentang Mindset.<br>tentunya kita sadar mw sebagus apapun strateginya, <br>kalau dri awal mindset-nya salah, maka manfaatnya ga bakal bertahan lama, <br>u’ll just be miserable. Bakal cepat lupa dan akhirnya kita capek doang. <br><br>Kita ambil contoh, semisal kita niatin belajar keras biar bisa kalahin tmn sekelas, <br>yang ada adalah siklus kecemasan yang tidak akan berhenti. <br>Karena membandingkan diri sama orang lain itu ga ada batasnya, right? <br>Iya, kadang reward-nya ada, tapi hanya short-term<br><br>In the end, cara terbaik dan tersehat yang bisa kita lakukan adalah<br>Meniatkan kerja keras dan proses belajar ini untuk kebaikan diri kita dan orng orng yang kita sayangi, <br>gimana maksudnya?? <br><br>Ya kita bertekad untuk berusaha sebaik mungkin agar bisa membangun masa depan yang baik, <br>membanggakan orng tua, dan tentunya diri kita sendiri, <br>mungkin terdengar klise, <br>tapi menurutku kalimat kalimat “demi kebaikan diri kita dan orang disekitar kita” itu ga hitam-putih dan bisa diartikan ke berbagai aspek.<br><br>Papaiii";
     case "17":
-      return "ini buat besokk hmmm";
+      return "alooo faraaaa, sehatt?<br> katanya pikiran tuh sepengaruh itu sama kesehatan,<br>jadi jngn banyak pikiran yaa,<br>klo capek ya istirahata aja, jangan dipaksain.<br>kamu itu cuma ada 1 di dunia😾, jadiii sehat selalu yaaa.<br><br>tombol love pencet aja ntar diakhir muncul tulisan hhi.<br>papaiii<br><br>*klo ada request music bilang aja yaaa.";
     case "18":
       return "ndaa ada apaa apaaa, ngapainn_-";
     case "19":
